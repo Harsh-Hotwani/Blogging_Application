@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "771075917585",
+    "project_id": "blogging-application-b9676",
+    "storage_bucket": "blogging-application-b9676.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:771075917585:android:d8893c760705b8012c6eb0",
+        "android_client_info": {
+          "package_name": "com.example.bloggingapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASwqkaU-42robexfpaziUd1-ELCOTidMs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
