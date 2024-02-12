@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
+import java.io.ObjectOutputStream.PutField
 
 class Registration : AppCompatActivity() {
     private val binding:ActivityRegistrationBinding by lazy{
@@ -49,10 +50,10 @@ class Registration : AppCompatActivity() {
                     .addOnCompleteListener{ task ->
                     Toast.makeText(this, "creating....", Toast.LENGTH_SHORT).show()
                     if (task.isSuccessful){
-                        val user:FirebaseUser? = auth.currentUser
+                        val user = auth.currentUser
                         user?. let{
-                            val userReference:DatabaseReference = database.getReference("users")
-                            val userId:String = user.uid
+                            val userReference = database.getReference("users")
+                            val userId = user.uid
                             val userData = com.example.bloggingapplication.model.UserData(
                                 registerName,
                                 registerEmail,
@@ -61,6 +62,7 @@ class Registration : AppCompatActivity() {
                             userReference.child(userId).setValue(userData)
 
                             val storageReference = storage.reference.child("profile_image/$userId.jpg")
+                            storageReference.putFile(imageuri!!)
                         }
                     }
                     else{
