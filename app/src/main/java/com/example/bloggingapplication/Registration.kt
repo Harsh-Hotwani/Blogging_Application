@@ -13,6 +13,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.bloggingapplication.databinding.ActivityRegistrationBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 
@@ -44,21 +45,22 @@ class Registration : AppCompatActivity() {
                 Toast.makeText(this, "please enter a sufficient data", Toast.LENGTH_SHORT).show()
             }
             else{
-                auth.createUserWithEmailAndPassword(registerEmail,registerPassword).addOnCompleteListener{
-                    task ->
+                auth.createUserWithEmailAndPassword(registerEmail,registerPassword)
+                    .addOnCompleteListener{ task ->
+                    Toast.makeText(this, "creating....", Toast.LENGTH_SHORT).show()
                     if (task.isSuccessful){
-                        val user = auth.currentUser
+                        val user:FirebaseUser? = auth.currentUser
                         user?. let{
-                            val userReference = database.getReference("users")
-                            val userId = user.uid
+                            val userReference:DatabaseReference = database.getReference("users")
+                            val userId:String = user.uid
                             val userData = com.example.bloggingapplication.model.UserData(
                                 registerName,
                                 registerEmail,
-                                registerPassword
+                                registerPassword,
                             )
                             userReference.child(userId).setValue(userData)
 
-                            val storageReference = storage.reference.child("@profile_image/$userId.jpg")
+                            val storageReference = storage.reference.child("profile_image/$userId.jpg")
                         }
                     }
                     else{
