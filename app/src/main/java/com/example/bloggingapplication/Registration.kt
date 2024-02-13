@@ -33,7 +33,7 @@ class Registration : AppCompatActivity() {
         supportActionBar!!.hide()
 
         auth = FirebaseAuth.getInstance()
-        database = FirebaseDatabase.getInstance()
+        database = FirebaseDatabase.getInstance("https://blogging-application-b9676-default-rtdb.asia-southeast1.firebasedatabase.app/")
         storage = FirebaseStorage.getInstance()
 
 
@@ -91,12 +91,13 @@ class Registration : AppCompatActivity() {
     @SuppressLint("SuspiciousIndentation")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode==PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data!=null && data.data!=null)
-            imageuri==data.data
+        if(requestCode==PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data!=null && data.data!=null) {
+            imageuri = data.data
             Glide.with(this)
                 .load(imageuri)
                 .apply(RequestOptions.circleCropTransform())
                 .into(binding.registerImage)
+        }
     }
 
 }
