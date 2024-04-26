@@ -26,7 +26,7 @@ class Registration : AppCompatActivity() {
     private lateinit var database : FirebaseDatabase
     private lateinit var storage : FirebaseStorage
     private var PICK_IMAGE_REQUEST=1
-    private var imageuri:Uri? = null
+    private var imageUri:Uri? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -51,6 +51,7 @@ class Registration : AppCompatActivity() {
                     Toast.makeText(this, "creating....", Toast.LENGTH_SHORT).show()
                     if (task.isSuccessful){
                         val user = auth.currentUser
+                        auth.signOut()
                         user?. let{
                             val userReference = database.getReference("users")
                             val userId = user.uid
@@ -62,7 +63,24 @@ class Registration : AppCompatActivity() {
                             userReference.child(userId).setValue(userData)
 
                             val storageReference = storage.reference.child("profile_image/$userId.jpg")
-                            storageReference.putFile(imageuri!!)
+                            storageReference.putFile(imageUri!!).addOnCompleteListener{
+                                task->
+                                if (task.isSuccessful){
+                                    storageReference.downloadUrl.addOnCompleteListener { imageUri->
+                                        if (imageUri.isSuccessful){
+                                            val imageUrl = imageUri.result.toString()
+                                            userReference.child(userId).child("profileImage").setValue(imageUrl)
+                                            Glide.with(this)
+                                                .load(imageUri)
+                                                .apply(RequestOptions.circleCropTransform())
+                                                .into(binding.registerImage)
+                                        }
+                                    }
+                                }
+                            }
+                            Toast.makeText(this, "registration is succesfull", Toast.LENGTH_SHORT).show()
+                            startActivity(Intent(this,Login::class.java))
+                            finish()
                         }
                     }
                     else{
@@ -92,9 +110,9 @@ class Registration : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode==PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data!=null && data.data!=null) {
-            imageuri = data.data
+            imageUri = data.data
             Glide.with(this)
-                .load(imageuri)
+                .load(imageUri)
                 .apply(RequestOptions.circleCropTransform())
                 .into(binding.registerImage)
         }
