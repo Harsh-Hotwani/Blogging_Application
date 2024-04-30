@@ -70,10 +70,6 @@ class Registration : AppCompatActivity() {
                                         if (imageUri.isSuccessful){
                                             val imageUrl = imageUri.result.toString()
                                             userReference.child(userId).child("profileImage").setValue(imageUrl)
-                                            Glide.with(this)
-                                                .load(imageUri)
-                                                .apply(RequestOptions.circleCropTransform())
-                                                .into(binding.registerImage)
                                         }
                                     }
                                 }
