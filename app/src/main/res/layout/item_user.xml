@@ -99,7 +99,7 @@
             app:layout_constraintTop_toBottomOf="@+id/divider" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/readMoreButton"
             android:layout_width="180dp"
             android:layout_height="40dp"
             android:backgroundTint="@color/skyblue"
@@ -113,14 +113,14 @@
             android:id="@+id/likeCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="76dp"
+            android:layout_marginStart="32dp"
             android:text="20"
             android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/button"
-            app:layout_constraintStart_toEndOf="@+id/button"
-            app:layout_constraintTop_toTopOf="@+id/button"
+            app:layout_constraintBottom_toBottomOf="@+id/readMoreButton"
+            app:layout_constraintStart_toEndOf="@+id/readMoreButton"
+            app:layout_constraintTop_toTopOf="@+id/readMoreButton"
             app:layout_constraintVertical_bias="1.0" />
 
         <ImageButton

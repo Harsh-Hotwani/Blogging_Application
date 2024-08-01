@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity() {
 
         databaseReference.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
+                blogItems.clear()
                 for (snapshot in snapshot.children)
                 {
                     val blogitem = snapshot.getValue(BlogItemModel::class.java)
@@ -50,6 +51,7 @@ class MainActivity : AppCompatActivity() {
                         blogItems.add(blogitem)
                     }
                 }
+                blogItems.reverse()
                 blogAdapter.notifyDataSetChanged()
             }
 
@@ -62,6 +64,8 @@ class MainActivity : AppCompatActivity() {
         binding.floatingAddArticleButton.setOnClickListener{
             startActivity(Intent(this,AddArticleActivity::class.java))
         }
+
+
     }
 
     private fun loadUserProfileImage(userId: String) {

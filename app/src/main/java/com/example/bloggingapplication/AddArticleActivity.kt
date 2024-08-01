@@ -1,12 +1,12 @@
 package com.example.bloggingapplication
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.bloggingapplication.databinding.ActivityAddArticleBinding
 import com.example.bloggingapplication.model.BlogItemModel
 import com.example.bloggingapplication.model.UserData
-import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
@@ -23,7 +23,13 @@ class AddArticleActivity : AppCompatActivity() {
     private val auth = FirebaseAuth.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar!!.hide()
         setContentView(binding.root)
+
+        binding.imageButton4.setOnClickListener{
+            startActivity(Intent(this,MainActivity::class.java))
+            finish()
+        }
 
         binding.addBlog.setOnClickListener{
             val title = binding.textInputLayout.editText?.text.toString().trim()
@@ -45,7 +51,7 @@ class AddArticleActivity : AppCompatActivity() {
                         if (userData!=null){
                             val userNameFromDB = userData.name
                             val userImageUrlFromDB = userData.profileImage
-                            val currentDate = SimpleDateFormat("yyyy-mm-dd").format(Date())
+                            val currentDate = SimpleDateFormat("YYYY-MM-dd").format(Date())
 
                             val blogItem = BlogItemModel(
                                 title,
