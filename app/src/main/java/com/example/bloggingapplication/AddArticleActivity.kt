@@ -26,7 +26,7 @@ class AddArticleActivity : AppCompatActivity() {
         supportActionBar!!.hide()
         setContentView(binding.root)
 
-        binding.imageButton4.setOnClickListener{
+        binding.backButtonAddMore.setOnClickListener{
             startActivity(Intent(this,MainActivity::class.java))
             finish()
         }

@@ -16,6 +16,10 @@ class ReadMoreActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        binding.backButton.setOnClickListener{
+            finish()
+        }
+
         val blogs = intent.getParcelableExtra<BlogItemModel>("blogItem")
         if (blogs!=null)
         {

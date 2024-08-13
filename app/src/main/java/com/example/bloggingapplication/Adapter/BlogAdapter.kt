@@ -47,6 +47,5 @@ class BlogAdapter(private val items:List<BlogItemModel>): RecyclerView.Adapter<B
                 context.startActivity(intent)
             }
         }
-
     }
 }
