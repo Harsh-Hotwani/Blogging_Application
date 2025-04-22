@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:text="Add New Blog Here"
-        android:textColor="@color/skyblue"
+        android:textColor="#4F4F4F"
         android:textSize="22sp"
         app:layout_constraintStart_toStartOf="@+id/backButtonAddMore"
         app:layout_constraintTop_toBottomOf="@+id/backButtonAddMore" />
@@ -100,7 +100,7 @@
         android:layout_height="67dp"
         android:layout_marginTop="16dp"
         android:layout_weight="1"
-        android:backgroundTint="@color/skyblue"
+        android:backgroundTint="#006666"
         android:text="Add Blog"
         android:textSize="20sp"
         app:cornerRadius="9dp"

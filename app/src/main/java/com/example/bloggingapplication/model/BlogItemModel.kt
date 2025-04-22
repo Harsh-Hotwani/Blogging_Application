@@ -19,6 +19,7 @@ data class BlogItemModel(
         parcel.readInt(),
         parcel.readString()?:"null"
     ) {
+
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

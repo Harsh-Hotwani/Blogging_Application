@@ -1,5 +1,6 @@
 package com.example.bloggingapplication
 
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -26,7 +27,11 @@ class Login : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar!!.hide()
 
-        auth = FirebaseAuth.getInstance()
+        val progressDialog = ProgressDialog(this)
+        progressDialog.setMessage("sabar karo, ek din jarur hoga.....")
+        progressDialog.setCancelable(false)
+
+        auth = FirebaseAuth.getInstance() //ErrorSolvedMaybe
         database = FirebaseDatabase.getInstance("https://blogging-application-b9676-default-rtdb.asia-southeast1.firebasedatabase.app/")
         storage = FirebaseStorage.getInstance()
 
@@ -35,6 +40,7 @@ class Login : AppCompatActivity() {
             finish()
         }
         binding.loginbutton.setOnClickListener{
+            progressDialog.show()
             val loginemail = binding.editTextTextPersonName.text.toString()
             val loginpassword = binding.editTextTextPassword.text.toString()
 
@@ -46,11 +52,13 @@ class Login : AppCompatActivity() {
                 .addOnCompleteListener{task ->
                 if (task.isSuccessful)
                 {
+                    progressDialog.dismiss()
                     Toast.makeText(this, "login sucessfull", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this,MainActivity::class.java))
                     finish()
                 }
                 else {
+                    progressDialog.dismiss()
                     Toast.makeText(
                         this,
                         "login failed,please enter correct details",
@@ -64,12 +72,12 @@ class Login : AppCompatActivity() {
 
     }
 
-    override fun onStart() {
+    /*override fun onStart() {
         super.onStart()
         val currentUser = auth.currentUser
         if (currentUser!=null){
             startActivity(Intent(this,MainActivity::class.java))
             finish()
         }
-    }
+    }*/
 }

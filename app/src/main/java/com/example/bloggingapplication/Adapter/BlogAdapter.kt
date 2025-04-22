@@ -12,7 +12,6 @@ import com.example.bloggingapplication.model.BlogItemModel
 
 class BlogAdapter(private val items:List<BlogItemModel>): RecyclerView.Adapter<BlogAdapter.BlogViewHolder>() {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BlogViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemUserBinding.inflate(inflater,parent,false)
